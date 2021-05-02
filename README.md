@@ -106,5 +106,13 @@ To validate & format your terraform repo, run the following command from your ro
 make tf-validate
 ```
 
+### Makefile
+up:
+I added 'cd infra && terraform apply --auto-approve' to the up command in the Makefile to facilitate applying changes to AWS
+
+down:
+I added 'cd infra && terraform destroy --auto-approve' to the down command in the Makefile to facilitate the removal of AWS resources to prevent unexpected charges
+
+
 
 ###### This project is licensed under the MIT Open Source License
