@@ -9,3 +9,15 @@ resource "aws_lb_target_group" "a2_lb_target_group" {
   protocol = "HTTP"
   vpc_id   = aws_vpc.main.id
 }
+
+resource "aws_lb" "a2-lb" {
+  name               = "a2-lb"
+  internal           = false
+  load_balancer_type = "application"
+  security_groups    = [aws_security_group.allow_http_ssh.id]
+  subnets            = [aws_subnet.public_az1.id, aws_subnet.public_az2.id, aws_subnet.public_az3.id]
+
+  tags = {
+    Environment = "production"
+  }
+}
