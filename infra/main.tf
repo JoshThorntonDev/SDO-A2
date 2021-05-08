@@ -21,3 +21,14 @@ resource "aws_lb" "a2-lb" {
     Environment = "production"
   }
 }
+
+resource "aws_lb_listener" "lb_listener" {
+  load_balancer_arn = aws_lb.a2-lb.arn
+  port              = "80"
+  protocol          = "HTTP"
+
+  default_action {
+    type             = "forward"
+    target_group_arn = aws_lb_target_group.a2_lb_target_group.arn
+  }
+}
