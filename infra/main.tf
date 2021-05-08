@@ -32,3 +32,7 @@ resource "aws_lb_listener" "lb_listener" {
     target_group_arn = aws_lb_target_group.a2_lb_target_group.arn
   }
 }
+
+output "endpoint" {
+  value = aws_lb.a2-lb.dns_name
+}
