@@ -27,3 +27,10 @@ resource "aws_security_group" "db" {
   }
 
 }
+
+resource "aws_docdb_cluster" "a2-docdb" {
+  cluster_identifier = "docdb-cluster"
+  availability_zones = ["us-east-1a", "us-east-1b", "us-east-1c"]
+  master_username    = "admin"
+  master_password    = "SDOAssignment2"
+}
