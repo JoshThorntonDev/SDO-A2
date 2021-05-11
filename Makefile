@@ -1,7 +1,7 @@
 .PHONY: up down tf-validate bootstrap ssh-gen tf-init pack
-
 up:
 	cd infra && terraform apply --auto-approve
+	ansible/scripts/run-ansible.sh
 down:
 	cd infra && terraform destroy --auto-approve
 
