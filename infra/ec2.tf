@@ -43,7 +43,6 @@ resource "aws_instance" "web" {
   associate_public_ip_address = true
   key_name                    = aws_key_pair.deployer.key_name
   vpc_security_group_ids      = [aws_security_group.allow_http_ssh.id]
-  count                       = 1
 
   tags = {
     Name = "Assignment 2 EC2"
