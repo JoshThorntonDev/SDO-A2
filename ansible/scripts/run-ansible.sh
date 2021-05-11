@@ -2,8 +2,8 @@
 set +ex
 
 ## Hacky way to build inventory file
-echo "all:" > inventory.yml
-echo "  hosts:" >> inventory.yml
+echo "all:" > ansible/inventory.yml
+echo "  hosts:" >> ansible/inventory.yml
 
-echo "   " $(cd ../infra && terraform output -raw public_ip) >> ./inventory.yml
+echo "   " $(cd infra && terraform output -raw public_ip) >> ansible/inventory.yml
 
