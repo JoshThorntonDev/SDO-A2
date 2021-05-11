@@ -38,7 +38,7 @@ resource "aws_security_group" "allow_http_ssh" {
 
 resource "aws_instance" "web" {
   ami                         = "ami-0d5eff06f840b45e9"
-  instance_type               = "t2.micro"
+  instance_type               = var.instance_type
   subnet_id                   = aws_subnet.private_az1.id
   associate_public_ip_address = true
   key_name                    = aws_key_pair.deployer.key_name
