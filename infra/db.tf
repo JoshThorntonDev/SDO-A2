@@ -7,7 +7,7 @@ resource "aws_security_group" "db" {
   vpc_id      = aws_vpc.main.id
 
   ingress {
-    description = "postgres from vpc"
+    description = "Access db from vpc"
     from_port   = 27017
     to_port     = 27017
     protocol    = "tcp"
