@@ -29,11 +29,13 @@ resource "aws_security_group" "db" {
 }
 
 resource "aws_docdb_cluster" "a2-docdb" {
-  cluster_identifier     = "docdb-cluster"
-  availability_zones     = ["us-east-1a", "us-east-1b", "us-east-1c"]
-  master_username        = "dbuser"
-  master_password        = "SDOAssignment2"
-  vpc_security_group_ids = [aws_security_group.db.id]
-  db_subnet_group_name   = aws_db_subnet_group.main.name
-  skip_final_snapshot    = true
+  cluster_identifier              = "docdb-cluster"
+  availability_zones              = ["us-east-1a", "us-east-1b", "us-east-1c"]
+  master_username                 = "dbuser"
+  master_password                 = "SDOAssignment2"
+  engine_version                  = "3.6"
+  vpc_security_group_ids          = [aws_security_group.db.id]
+  db_subnet_group_name            = aws_db_subnet_group.main.name
+  skip_final_snapshot             = true
+  db_cluster_parameter_group_name = "tls-disable"
 }
