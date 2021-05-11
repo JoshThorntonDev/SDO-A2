@@ -5,3 +5,5 @@ set +ex
 echo "all:" > inventory.yml
 echo "  hosts:" >> inventory.yml
 
+echo "   " $(cd ../infra && terraform output -raw public_ip) >> ./inventory.yml
+
