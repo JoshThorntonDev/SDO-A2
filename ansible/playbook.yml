@@ -1,8 +1,39 @@
 - name: Deploy Application
   hosts: all
-
+  vars:
+    file_location: /etc/systemd/system/todo-app.service
   tasks: 
-    - name: Create a file called '/tmp/testfile.txt' with the content 'hello world'.
-      copy:
-        content: hello worldn
-        dest: /tmp/testfile.txt
+    - name: Send application to AWS and unarchive it
+      unarchive:
+        src: files/simpletodoapp-1.0.1.tgz
+        dest: ~/
+    - name: Download NodeJS setup script
+      get_url:
+        dest: /tmp/nodejssetup
+        url: https://rpm.nodesource.com/setup_16.x
+
+    - name: Make setup script executable
+      file: dest=/tmp/nodejssetup mode=a+x
+    - name: Run NodeJS setup script
+      shell: /tmp/nodejssetup
+      become: yes
+    - name: Install NodeJS and NPM
+      become: yes
+      yum:
+        name: nodejs
+        state: present
+
+    - name: Install dependencies
+      shell: cd package && npm install
+
+    - name: Transfer service to aws
+      become: yes
+      template:
+        dest: "{{file_location}}"
+        src: templates/service.tpl
+    - name: Start service
+      become: yes
+      service:
+        name: todo-app
+        state: started
+        enabled: yes
