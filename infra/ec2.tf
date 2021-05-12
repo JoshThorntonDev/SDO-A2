@@ -6,17 +6,11 @@ resource "aws_key_pair" "deployer" {
 
 
 
-resource "aws_security_group" "allow_http_ssh" {
-  vpc_id      = aws_vpc.main.id
-  description = "allow http and ssh"
 
-  ingress {
-    description = "ssh from internet"
-    from_port   = 22
-    to_port     = 22
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
+
+resource "aws_security_group" "allow_http" {
+  vpc_id      = aws_vpc.main.id
+  description = "allow http"
 
   ingress {
     description = "http from internet"
@@ -35,7 +29,31 @@ resource "aws_security_group" "allow_http_ssh" {
   }
 
   tags = {
-    Name = "allow_http_ssh"
+    Name = "allow_http"
+  }
+}
+
+resource "aws_security_group" "allow_ssh" {
+  vpc_id      = aws_vpc.main.id
+  description = "allow ssh"
+
+  ingress {
+    description = "ssh from internet"
+    from_port   = 22
+    to_port     = 22
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  egress {
+    from_port   = 0
+    to_port     = 0
+    cidr_blocks = ["0.0.0.0/0"]
+    protocol    = "-1"
+  }
+
+  tags = {
+    Name = "allow_ssh"
   }
 }
 
@@ -59,7 +77,7 @@ resource "aws_instance" "web" {
   subnet_id                   = aws_subnet.private_az1.id
   associate_public_ip_address = true
   key_name                    = aws_key_pair.deployer.key_name
-  vpc_security_group_ids      = [aws_security_group.allow_5000.id, aws_security_group.allow_http_ssh.id]
+  vpc_security_group_ids      = [aws_security_group.allow_5000.id, aws_security_group.allow_ssh.id]
 
   tags = {
     Name = "Assignment 2 EC2"
@@ -77,7 +95,7 @@ resource "aws_lb" "a2-lb" {
   name               = "a2-lb"
   internal           = false
   load_balancer_type = "application"
-  security_groups    = [aws_security_group.allow_http_ssh.id]
+  security_groups    = [aws_security_group.allow_http.id]
   subnets            = [aws_subnet.public_az1.id, aws_subnet.public_az2.id, aws_subnet.public_az3.id]
 
 
