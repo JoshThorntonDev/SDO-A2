@@ -30,7 +30,7 @@ resource "aws_security_group" "db" {
 
 resource "aws_docdb_cluster_instance" "a2-docdb-instances" {
   count              = var.db_instance_count
-  identifier         = "docdb-cluster-demo-${count.index}"
+  identifier         = "docdb-cluster-instance-${count.index}"
   cluster_identifier = aws_docdb_cluster.a2-docdb.id
   instance_class     = var.db_instance_size
 }
