@@ -14,3 +14,8 @@ output "db_pw" {
   value     = aws_docdb_cluster.a2-docdb.master_password
   sensitive = true
 }
+
+output "db_username" {
+  value     = aws_docdb_cluster.a2-docdb.master_username
+  sensitive = true
+}
