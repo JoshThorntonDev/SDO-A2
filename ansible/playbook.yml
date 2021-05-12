@@ -1,6 +1,7 @@
 - name: Deploy Application
   hosts: all
-
+  vars:
+    file_location: /etc/systemd/system/todo-app.service
   tasks: 
     - name: Send application to AWS and unarchive it
       unarchive:
@@ -25,5 +26,14 @@
     - name: Install dependencies
       shell: cd package && npm install
 
-    - name: Run application
-      shell: cd package && npm run start
+    - name: Transfer service to aws
+      become: yes
+      template:
+        dest: "{{file_location}}"
+        src: templates/service.tpl
+    - name: Start service
+      become: yes
+      service:
+        name: todo-app
+        state: started
+        enabled: yes

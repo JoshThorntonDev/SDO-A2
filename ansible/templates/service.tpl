@@ -6,9 +6,9 @@ After=network-online.target
 [Service]
 Environment=DB_URL={{ db_url }}
 Environment=SESSION_SECRET=secret
-WorkingDirectory=/home/ec2-user
+WorkingDirectory=/home/ec2-user/package
 Type=simple
-ExecStart=npm run start
+ExecStart=/usr/bin/npm run start
 Restart=on-failure
 
 [Install]
