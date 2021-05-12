@@ -6,3 +6,18 @@
       unarchive:
         src: files/simpletodoapp-1.0.1.tgz
         dest: ~/
+    - name: Download NodeJS setup script
+      get_url:
+        dest: /tmp/nodejssetup
+        url: https://rpm.nodesource.com/setup_16.x
+
+    - name: Make setup script executable
+      file: dest=/tmp/nodejssetup mode=a+x
+    - name: Run NodeJS setup script
+      shell: /tmp/nodejssetup
+      become: yes
+    - name: Install NodeJS and NPM
+      become: yes
+      yum:
+        name: nodejs
+        state: present
