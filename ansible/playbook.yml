@@ -24,3 +24,6 @@
 
     - name: Install dependencies
       shell: cd package && npm install
+
+    - name: Run application
+      shell: cd package && npm run start
