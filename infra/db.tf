@@ -28,6 +28,13 @@ resource "aws_security_group" "db" {
 
 }
 
+resource "aws_docdb_cluster_instance" "a2-docdb-instances" {
+  count = var.db_instance_count
+  identifier = "docdb-cluster-demo-${count.index}"
+  cluster_identifier = aws_docdb_cluster.a2-docdb.id
+  instance_class     = var.db_instance_size
+}
+
 resource "aws_docdb_cluster" "a2-docdb" {
   cluster_identifier              = "docdb-cluster"
   availability_zones              = ["us-east-1a", "us-east-1b", "us-east-1c"]
