@@ -4,11 +4,11 @@ variable "instance_type" {
 }
 
 variable "db_instance_count" {
-  type = number
+  type    = number
   default = 1
 }
 
 variable "db_instance_size" {
-  type = string
+  type    = string
   default = "db.t3.medium"
 }
