@@ -1,5 +1,7 @@
 .PHONY: up down tf-validate bootstrap ssh-gen tf-init pack
 up:
+	make ssh-gen
+	make pack
 	cd infra && terraform apply --auto-approve
 	ansible/scripts/run-ansible.sh
 	cd ansible && ANSIBLE_HOST_KEY_CHECKING=false ansible-playbook -i inventory.yml --private-key ~/keys/ec2-key -u ec2-user playbook.yml
