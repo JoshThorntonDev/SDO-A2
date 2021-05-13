@@ -140,12 +140,18 @@ I added 'cd infra && terraform destroy --auto-approve' to the down command in th
 
 
 ### Infrastructure
+
+#### EC2
+The EC2 instance is set up with a variable class (instance_type) which defaults to t2.micro.
+It has two security groups attached, the first allows access on port 5000 from anything within the VPC's cidr range. The load balancer uses this port to route HTTP traffic to the EC2. The second security group exposes port 22, allowing for SSH access to the instance for automatic deployment/remote maintenance.
+
+
 #### DocumentDB
 A security group that restricts inbound traffic to port 27017 and only allows traffic from the VPC has been attached to the database.
 By restricting access to the database, it becomes more difficult for an attacker to attempt to access the database.
 An engine version of 3.6 was applied to the database, as the 'tls-disable' parameter group specifies that it is for version 3.6 only.
 
-The DocDB cluster supports multiple instances through the db_instance_count variable, which by default is set to 1. The class of the instances can also be defined using db_instance_size. The use of variables makes it easier to make modifications to the database without having to edit the code.
+The DocDB cluster supports multiple instances through the db_instance_count variable, which by default is set to 1. The class of the instances can also be defined using db_instance_size (Defaulting to db.t3.medium). The use of variables makes it easier to make modifications to the database without having to edit the code.
 
 
 #### Load Balancer (Balancer, Listener and Target Group)
