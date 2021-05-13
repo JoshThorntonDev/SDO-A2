@@ -148,5 +148,11 @@ An engine version of 3.6 was applied to the database, as the 'tls-disable' param
 The DocDB cluster supports multiple instances through the db_instance_count variable, which by default is set to 1. The class of the instances can also be defined using db_instance_size. The use of variables makes it easier to make modifications to the database without having to edit the code.
 
 
+#### Load Balancer (Balancer, Listener and Target Group)
+The load balancer is responsible for routing HTTP traffic to the specified port on the EC2 instance. In this case, port 5000.
+The listener listens on port 80 (HTTP), and forwards requests to the target group. The target group then sends the requests to port 5000 on the EC2 instance through the target group attachment.
+
+The load balancer has a security group that only permits internet-based traffic on port 80.
+
 
 ###### This project is licensed under the MIT Open Source License
