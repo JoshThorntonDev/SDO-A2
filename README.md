@@ -107,7 +107,7 @@ make tf-validate
 ```
 
 ### Makefile
-up:
+#### up:
 Provided that one has up-to-date AWS credentials, make up will run everything necessary to deploy the application.
 There are five steps to make up:
 
@@ -135,8 +135,17 @@ There are five steps to make up:
 - It then installs the dependencies required by the application using npm
 - Finally, it creates a service that starts the application
 
-down:
+#### down:
 I added 'cd infra && terraform destroy --auto-approve' to the down command in the Makefile to facilitate the removal of AWS resources to prevent unexpected charges
+
+
+### Infrastructure
+#### DocumentDB
+A security group that restricts inbound traffic to port 27017 and only allows traffic from the VPC has been attached to the database.
+By restricting access to the database, it becomes more difficult for an attacker to attempt to access the database.
+An engine version of 3.6 was applied to the database, as the 'tls-disable' parameter group specifies that it is for version 3.6 only.
+
+The DocDB cluster supports multiple instances through the db_instance_count variable, which by default is set to 1. The class of the instances can also be defined using db_instance_size. The use of variables makes it easier to make modifications to the database without having to edit the code.
 
 
 
