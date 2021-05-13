@@ -110,7 +110,7 @@ make tf-validate
 
 #### How to Deploy
 - All commands are run from the root directory
-- AWS credentials must be up-to-date. For more information, vist https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-files.html
+- AWS credentials must be up to date. For more information, visit https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-files.html
 1. If this is the first time deploying, run `make bootstrap`
 ![Running make bootstrap](screenshots/bootstrap.jpg)
 2. If there are not already files named ec2-key and/or ec2-key.pub in ~/keys/, run `make ssh-gen`
