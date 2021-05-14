@@ -111,7 +111,7 @@ make tf-validate
 #### How to Deploy
 - All commands are run from the root directory
 - AWS credentials must be up to date. For more information, visit https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-files.html
-1. If this is the first time deploying, run `make bootstrap` and `make tf-init`
+1. If this is the first time deploying, run `make bootstrap` and then `make tf-init`
 ![Running make bootstrap](screenshots/bootstrap.jpg)
 ![Running make tf-init](screenshots/init.jpg)
 2. If there are not already files named ec2-key and/or ec2-key.pub in ~/keys/, run `make ssh-gen`
@@ -174,6 +174,8 @@ There are four steps in make up:
 #### down:
 I added `cd infra && terraform destroy --auto-approve` to the down command in the Makefile to facilitate the removal of AWS resources to prevent unexpected charges
 
+#### tf-init
+The two -backend-config commands dynamically define the bucket and dynamodb_table variables for use in the remote backend. If these were hardcoded values, since S3 Buckets require globally unique names, others using this repo would be met with errors unless they manually updated the values.
 
 ### Infrastructure
 
