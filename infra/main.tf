@@ -1,4 +1,10 @@
 provider "aws" {
-  version = "~> 2.23"
   region  = "us-east-1"
+}
+
+terraform {
+  backend "s3" {
+    key="terraform.tfstate"
+    region = "us-east-1"
+  }
 }
