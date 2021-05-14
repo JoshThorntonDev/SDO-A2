@@ -174,6 +174,8 @@ There are four steps in make up:
 #### down:
 I added `cd infra && terraform destroy --auto-approve` to the down command in the Makefile to facilitate the removal of AWS resources to prevent unexpected charges
 
+#### tf-init
+The two -backend-config commands dynamically define the bucket and dynamodb_table variables for use in the remote backend. If these were hardcoded values, since S3 Buckets require globally unique names, others using this repo would be met with errors unless they manually updated the values.
 
 ### Infrastructure
 
