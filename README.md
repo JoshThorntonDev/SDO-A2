@@ -111,8 +111,9 @@ make tf-validate
 #### How to Deploy
 - All commands are run from the root directory
 - AWS credentials must be up to date. For more information, visit https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-files.html
-1. If this is the first time deploying, run `make bootstrap`
+1. If this is the first time deploying, run `make bootstrap` and `make tf-init`
 ![Running make bootstrap](screenshots/bootstrap.jpg)
+![Running make tf-init](screenshots/init.jpg)
 2. If there are not already files named ec2-key and/or ec2-key.pub in ~/keys/, run `make ssh-gen`
 ![Running make ssh-gen](screenshots/sshgen.jpg)
 3. If there is not already a .tgz file in ansible/files/, or if a change has been made to the source code of the application, run `make pack`.
