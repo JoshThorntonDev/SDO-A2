@@ -7,7 +7,7 @@ output "public_ip" {
 }
 
 output "db_dns_name" {
-  value = aws_docdb_cluster.a2-docdb.endpoint
+  value     = aws_docdb_cluster.a2-docdb.endpoint
   sensitive = true
 }
 
