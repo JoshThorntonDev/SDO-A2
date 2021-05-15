@@ -26,7 +26,7 @@ ssh-gen:
 
 tf-init:
 	cd infra && terraform init \
-	-backend-config="bucket=$(shell cd bootstrap && terraform output state_bucket_name)" \
+	-backend-config="bucket=$(shell cd bootstrap && terraform output -raw state_bucket_name)" \
 	-backend-config="dynamodb_table=$(shell cd bootstrap && terraform output -raw dynamoDb_lock_table_name)"
 
 pack:
