@@ -184,6 +184,8 @@ The two -backend-config commands dynamically define the bucket and dynamodb_tabl
 The EC2 instance is set up with a variable class (instance_type) which defaults to t2.micro.
 It has two security groups attached, the first allows access on port 5000 from anything within the VPC's cidr range. The load balancer uses this port to route HTTP traffic to the EC2. The second security group exposes port 22, allowing for SSH access to the instance for automatic deployment/remote maintenance.
 
+The `"aws_ami"` data source defined in ec2.tf automatically obtains the latest Amazon Linux 2 AMI. The EC2 instance uses this AMI instead of a hard coded one so it is easier to stay up to date with patches.
+
 
 #### DocumentDB
 A security group that restricts inbound traffic to port 27017 and only allows traffic from the VPC has been attached to the database.
