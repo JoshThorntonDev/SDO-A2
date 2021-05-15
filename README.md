@@ -201,6 +201,7 @@ The listener listens on port 80 (HTTP), and forwards requests to the target grou
 
 The load balancer has a security group that only permits internet-based traffic on port 80.
 
-
+#### Remote Backend
+The terraform state files are stored in an S3 bucket created during `make bootstrap`. They are also locked using DynamoDB. This permits multiple people to work on the deployment without having to worry about having an up to date statefile.
 
 ###### This project is licensed under the MIT Open Source License
