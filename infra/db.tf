@@ -14,18 +14,9 @@ resource "aws_security_group" "db" {
     cidr_blocks = [aws_vpc.main.cidr_block]
   }
 
-  egress {
-    from_port   = 0
-    to_port     = 0
-    protocol    = "-1"
-    cidr_blocks = ["0.0.0.0/0"]
-
-  }
-
   tags = {
     Name = "Allow MongoDB"
   }
-
 }
 
 resource "aws_docdb_cluster_instance" "a2-docdb-instances" {
