@@ -77,7 +77,7 @@ data "aws_ami" "amazon-linux-2-latest" {
 
   filter {
     name   = "name"
-    values = ["amzn2-ami-hvm-*-x86_64-ebs"]
+    values = var.ec2_ami_filter
   }
 }
 
