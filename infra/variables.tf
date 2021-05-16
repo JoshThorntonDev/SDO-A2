@@ -12,3 +12,8 @@ variable "db_instance_size" {
   type    = string
   default = "db.t3.medium"
 }
+
+variable "ec2_ami_filter" {
+  type    = list(string)
+  default = ["amzn2-ami-hvm-*-x86_64-ebs"]
+}
