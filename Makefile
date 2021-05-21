@@ -3,7 +3,7 @@ up:
 	cd infra && terraform apply --auto-approve
 	ansible/scripts/run-ansible.sh
 	cd ansible && ANSIBLE_HOST_KEY_CHECKING=false ansible-playbook -i inventory.yml --private-key ~/keys/ec2-key -u ec2-user playbook.yml
-	cd infra && terraform output -raw public_dns
+	cd infra && terraform output public_dns
 down:
 	cd infra && terraform destroy --auto-approve
 
